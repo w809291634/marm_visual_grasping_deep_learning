@@ -30,6 +30,7 @@ class AiCamera(object):
         cam=self.__camera_check__()
         if cam!=-1:
             self.cap = cv2.VideoCapture(cam)
+            self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
             print("set cam number %d"%cam)
 
         
@@ -127,6 +128,8 @@ class AiCamera(object):
 if __name__ == '__main__':
     obj_class_names = ['box1', 'box2', 'box3', 'box4']
     aicamer=AiCamera("pill_detection_20220426",obj_class_names)
-    sta,rect,types=aicamer.pill_detect(20)
-    print(sta,rect,types)
+    while True:
+        sta,rect,types=aicamer.pill_detect(20)
+        print(sta,rect,types)
+        time.sleep(1)
 
